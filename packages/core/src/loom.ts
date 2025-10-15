@@ -8,16 +8,28 @@ type plugin = () => { routes?: Route[] };
 export type LoomOptions = {
   modules: Function[];
   plugins?: plugin[];
+  applicationName?: string;
 };
 
 export class Loom implements LoomInstance {
   private routes: Route[] = [];
   private logger: ReturnType<Logger["getChild"]>;
 
-  constructor({ modules }: { modules: Function[] }) {
+  public applicationName = "Loom App";
+
+  constructor({
+    modules,
+    applicationName,
+  }: {
+    modules: Function[];
+    applicationName?: string;
+  }) {
     const masterLogger = new Logger();
     Container.set(Logger, masterLogger);
     this.logger = masterLogger.getChild("core");
+    if (applicationName) {
+      this.applicationName = applicationName;
+    }
 
     modules.map(async (module) => {
       Container.get(module);
@@ -34,20 +46,17 @@ export class Loom implements LoomInstance {
 
   listen(port: number) {
     bun.serve({
-      port: 3165,
-      routes: {
-        "/": () => new Response("Hello World"),
-        ...this.routes.reduce(
-          (acc: Record<string, Route["handler"]>, route) => {
-            this.logger.info(
-              `Registering route: [${route.methods.join(",")}] ${route.path}`
-            );
-            acc[`${route.path}`] = route.handler;
-            return acc;
-          },
-          {}
-        ),
-      },
+      port: port || 3645,
+      routes: this.routes.reduce(
+        (acc: Record<string, Route["handler"]>, route) => {
+          this.logger.info(
+            `Registering route: [${route.methods.join(",")}] ${route.path}`
+          );
+          acc[`${route.path}`] = route.handler;
+          return acc;
+        },
+        {}
+      ),
     });
   }
 }

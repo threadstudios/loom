@@ -35,7 +35,7 @@ export const LoomGqlPlugin = () => (instance: LoomInstance) => {
       return new Response(
         ruruHTML({
           endpoint: "/graphql",
-          htmlParts: { titleTag: "<title>Loom GQL Api</title>" },
+          htmlParts: { titleTag: `<title>${instance.applicationName}</title>` },
         }),
         {
           headers: { "Content-Type": "text/html" },
