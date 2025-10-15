@@ -138,7 +138,10 @@ program
     }
 
     for (const key of packageFileData.keys()) {
-      await $`cd ${process.cwd()}/${key} && bun publish`;
+      await $`cd ${process.cwd()}/${key.replace(
+        "/package.json",
+        ""
+      )} && bun publish`;
     }
   });
 
