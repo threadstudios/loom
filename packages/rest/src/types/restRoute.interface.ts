@@ -1,6 +1,6 @@
 import type { ZodType } from "zod/v4";
 
-import type { HttpMethods } from "@loom/common";
+import type { HttpMethods } from "@threadws/loom-common";
 import type { LoomMiddleware } from "../middleware";
 
 export interface RestRoute {

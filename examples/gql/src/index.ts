@@ -1,5 +1,5 @@
-import { Loom } from "@loom/core";
-import { LoomGqlPlugin } from "@loom/graphql";
+import { Loom } from "@threadws/loom-core";
+import { LoomGqlPlugin } from "@threadws/loom-graphql";
 import { AppModule } from "./app.module";
 
 const app = new Loom({

@@ -1,4 +1,4 @@
-import { Service } from "@loom/core";
+import { Service } from "@threadws/loom-core";
 
 @Service()
 export class AppService {

@@ -1,4 +1,4 @@
-import { Controller, Get } from "@loom/rest";
+import { Controller, Get } from "@threadws/loom-rest";
 
 @Controller("/other")
 export class OtherController {

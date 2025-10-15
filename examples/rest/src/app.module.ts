@@ -1,4 +1,4 @@
-import { Module } from "@loom/core";
+import { Module } from "@threadws/loom-core";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { OtherController } from "./other.controller";

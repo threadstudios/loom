@@ -1,4 +1,4 @@
-import { Field, InputType } from "@loom/graphql";
+import { Field, InputType } from "@threadws/loom-graphql";
 
 @InputType()
 export class PaginationInput {

@@ -1,5 +1,5 @@
-import type { LoomRequest } from "@loom/common";
-import { BaseGuard } from "@loom/graphql";
+import type { LoomRequest } from "@threadws/loom-common";
+import { BaseGuard } from "@threadws/loom-graphql";
 
 export class AuthGuard implements BaseGuard {
   async canActivate(request: LoomRequest, ctx: { userId: string }) {

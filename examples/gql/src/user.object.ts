@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "@loom/graphql";
+import { Field, ObjectType } from "@threadws/loom-graphql";
 
 @ObjectType()
 export class User {

@@ -12,13 +12,6 @@ import type {
 } from "./types";
 import { applyPackageChanges, getDependencyChanges } from "./utils";
 
-const packagesToPublish: Record<string, string> = {
-  "@loom/common": "@threadws/loom-common",
-  "@loom/graphql": "@threadws/loom-graphql",
-  "@loom/core": "@threadws/loom-core",
-  "@loom/rest": "@threadws/loom-rest",
-};
-
 const rootPkg = await require(`${process.cwd()}/package.json`);
 
 program
@@ -78,24 +71,15 @@ program
     const packageFilePaths = await Array.fromAsync(glob.scan("."));
     for (const packagePath of packageFilePaths) {
       const packageJSON = await require(`${process.cwd()}/${packagePath}`);
-      const newPackageName = packagesToPublish[packageJSON.name];
-      if (!newPackageName)
-        throw new Error(`Package: ${newPackageName} not found in package map`);
+
       packageVersionData.push({
-        oldName: packageJSON.name,
-        name: newPackageName,
+        name: packageJSON.name,
         version: packageJSON.version,
       });
       packageFileData.set(packagePath, {
         oldContent: packageJSON,
         nextContent: packageJSON,
-        changes: [
-          {
-            field: "name",
-            from: packageJSON.name,
-            to: newPackageName,
-          },
-        ],
+        changes: [],
         writePath: packagePath,
       });
     }

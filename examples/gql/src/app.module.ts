@@ -1,4 +1,4 @@
-import { Module } from "@loom/core";
+import { Module } from "@threadws/loom-core";
 import { AppService } from "./app.service";
 import { TodoResolver } from "./todo.resolver";
 import { UserResolver } from "./user.resolver";

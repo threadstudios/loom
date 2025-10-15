@@ -1,5 +1,5 @@
 {
-  "name": "@loom/graphql",
+  "name": "@threadws/loom-graphql",
   "module": "./src/index.ts",
   "type": "module",
   "devDependencies": {
@@ -14,7 +14,7 @@
     }
   },
   "dependencies": {
-    "@loom/common": "workspace:*",
+    "@threadws/loom-common": "workspace:*",
     "graphql": "^16.11.0",
     "graphql-http": "^1.22.4",
     "reflect-metadata": "^0.2.2",
@@ -22,5 +22,5 @@
     "ts-pattern": "^5.8.0",
     "typedi": "^0.10.0"
   },
-  "version": "0.0.3"
+  "version": "0.0.4"
 }

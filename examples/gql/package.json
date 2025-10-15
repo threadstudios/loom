@@ -14,8 +14,8 @@
     }
   },
   "dependencies": {
-    "@loom/core": "workspace:*",
-    "@loom/graphql": "workspace:*",
+    "@threadws/loom-core": "workspace:*",
+    "@threadws/loom-graphql": "workspace:*",
     "zod": "^4.1.11"
   }
 }

@@ -1,5 +1,5 @@
-import type { LoomPlugin, Route } from "@loom/common";
-import { Logger, LoomInstance } from "@loom/common";
+import type { LoomPlugin, Route } from "@threadws/loom-common";
+import { Logger, LoomInstance } from "@threadws/loom-common";
 import bun from "bun";
 import Container from "typedi";
 

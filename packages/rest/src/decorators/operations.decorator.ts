@@ -1,4 +1,4 @@
-import { HttpMethods } from "@loom/common";
+import { HttpMethods } from "@threadws/loom-common";
 import "reflect-metadata";
 import { Container } from "typedi";
 import type { LoomMiddleware } from "../middleware";

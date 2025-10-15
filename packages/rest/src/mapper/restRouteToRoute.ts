@@ -1,4 +1,4 @@
-import { Logger, type LoomRequest, type Route } from "@loom/common";
+import { Logger, type LoomRequest, type Route } from "@threadws/loom-common";
 import type { BunRequest } from "bun";
 import Container from "typedi";
 import { getControllerRoute } from "../decorators/controller.decorator";

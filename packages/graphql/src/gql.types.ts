@@ -1,4 +1,4 @@
-import type { LoomRequest } from "@loom/common";
+import type { LoomRequest } from "@threadws/loom-common";
 import type {
   GraphQLInputObjectType,
   GraphQLObjectType,

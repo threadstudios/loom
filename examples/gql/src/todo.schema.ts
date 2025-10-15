@@ -1,4 +1,11 @@
-import { Args, Ctx, Guard, Parent, Query, Schema } from "@loom/graphql";
+import {
+  Args,
+  Ctx,
+  Guard,
+  Parent,
+  Query,
+  Schema,
+} from "@threadws/loom-graphql";
 import { AuthGuard } from "./auth.guard";
 import { Todo } from "./todo.object";
 import { PaginationInput } from "./pagination.object";

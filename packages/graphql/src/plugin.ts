@@ -1,4 +1,4 @@
-import { HttpMethods, Logger, type LoomInstance } from "@loom/common";
+import { HttpMethods, Logger, type LoomInstance } from "@threadws/loom-common";
 
 import { createHandler } from "graphql-http/lib/use/fetch";
 import { ruruHTML } from "ruru/server";

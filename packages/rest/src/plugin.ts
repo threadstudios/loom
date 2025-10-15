@@ -1,4 +1,4 @@
-import { HttpMethods, LoomInstance } from "@loom/common";
+import { HttpMethods, LoomInstance } from "@threadws/loom-common";
 import type { BunRequest } from "bun";
 import Container from "typedi";
 import { restRouteToRoute } from "./mapper/restRouteToRoute";

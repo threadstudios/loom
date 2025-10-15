@@ -1,4 +1,4 @@
-import { Args, Parent, ResolveField, Resolver } from "@loom/graphql";
+import { Args, Parent, ResolveField, Resolver } from "@threadws/loom-graphql";
 import { Todo } from "./todo.object";
 import { User } from "./user.object";
 

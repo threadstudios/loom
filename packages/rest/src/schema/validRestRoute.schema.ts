@@ -1,4 +1,4 @@
-import { HttpMethods } from "@loom/common";
+import { HttpMethods } from "@threadws/loom-common";
 import z from "zod/v4";
 
 export const validRestRouteSchema = z.object({

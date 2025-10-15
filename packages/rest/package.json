@@ -1,5 +1,5 @@
 {
-  "name": "@loom/rest",
+  "name": "@threadws/loom-rest",
   "module": "./src/index.ts",
   "type": "module",
   "devDependencies": {
@@ -14,12 +14,12 @@
     }
   },
   "dependencies": {
-    "@loom/common": "workspace:*",
+    "@threadws/loom-common": "workspace:*",
     "openapi3-ts": "^4.5.0",
     "reflect-metadata": "^0.2.2",
     "ts-pattern": "^5.8.0",
     "typedi": "^0.10.0",
     "zod": "^4.1.11"
   },
-  "version": "0.0.3"
+  "version": "0.0.4"
 }

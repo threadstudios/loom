@@ -7,7 +7,7 @@ import {
   Output,
   Param,
   Post,
-} from "@loom/rest";
+} from "@threadws/loom-rest";
 import z from "zod/v4";
 import { AppService } from "./app.service";
 import { TestMiddleware } from "./test.middleware";

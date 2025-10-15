@@ -1,5 +1,5 @@
-import { Loom } from "@loom/core";
-import { LoomRestPlugin } from "@loom/rest";
+import { Loom } from "@threadws/loom-core";
+import { LoomRestPlugin } from "@threadws/loom-rest";
 import { AppModule } from "./app.module";
 
 const app = new Loom({

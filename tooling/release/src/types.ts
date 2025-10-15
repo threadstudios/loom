@@ -24,7 +24,6 @@ export type PackageFileDetails = {
 export type PackageFileMap = Map<string, PackageFileDetails>;
 
 export type PackageDependencyChangeData = {
-  oldName: string;
   name: string;
   version: string;
 };
