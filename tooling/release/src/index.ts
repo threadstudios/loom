@@ -141,7 +141,7 @@ program
       await $`cd ${process.cwd()}/${key.replace(
         "/package.json",
         ""
-      )} && bun publish`;
+      )} && bun publish --access public`;
     }
   });
 
