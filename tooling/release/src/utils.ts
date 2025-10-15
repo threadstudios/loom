@@ -1,9 +1,4 @@
-import type {
-  JSONRecord,
-  PackageFileDetails,
-  PackageFileMap,
-  PackageJSONLike,
-} from "./types";
+import type { JSONRecord, PackageFileDetails, PackageJSONLike } from "./types";
 
 export function getDependencyChanges(
   dependencyRecord: JSONRecord,

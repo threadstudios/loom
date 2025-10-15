@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
 import semver from "semver";
-import { Glob, write } from "bun";
+import { Glob, write, $ } from "bun";
 
 import { program } from "commander";
 import { input } from "@inquirer/prompts";
@@ -135,6 +135,10 @@ program
 
     for (const [key, packageData] of packageFileData.entries()) {
       await write(key, JSON.stringify(packageData.nextContent, null, 2));
+    }
+
+    for (const key of packageFileData.keys()) {
+      await $`cd ${key} && bun publish`;
     }
   });
 
