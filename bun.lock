@@ -40,6 +40,7 @@
     },
     "packages/common": {
       "name": "@loom/common",
+      "version": "0.0.2",
       "dependencies": {
         "@logtape/logtape": "^1.1.1",
         "@logtape/pretty": "^1.1.1",
@@ -56,6 +57,7 @@
     },
     "packages/core": {
       "name": "@loom/core",
+      "version": "0.0.2",
       "dependencies": {
         "reflect-metadata": "^0.2.2",
         "typedi": "^0.10.0",
@@ -69,6 +71,7 @@
     },
     "packages/graphql": {
       "name": "@loom/graphql",
+      "version": "0.0.2",
       "dependencies": {
         "@loom/common": "workspace:*",
         "graphql": "^16.11.0",
@@ -85,12 +88,9 @@
         "typescript": "^5",
       },
     },
-    "packages/grpc": {
-      "name": "grpc",
-      "version": "0.0.0",
-    },
     "packages/rest": {
       "name": "@loom/rest",
+      "version": "0.0.2",
       "dependencies": {
         "@loom/common": "workspace:*",
         "openapi3-ts": "^4.5.0",
@@ -228,8 +228,6 @@
     "graphql": ["graphql@16.11.0", "", {}, "sha512-mS1lbMsxgQj6hge1XZ6p7GPhbrtFwUFYi3wRzXAC/FmYnyXMTvvI3td3rjmQ2u8ewXueaSvRPWaEcgVVOT9Jnw=="],
 
     "graphql-http": ["graphql-http@1.22.4", "", { "peerDependencies": { "graphql": ">=0.11 <=16" } }, "sha512-OC3ucK988teMf+Ak/O+ZJ0N2ukcgrEurypp8ePyJFWq83VzwRAmHxxr+XxrMpxO/FIwI4a7m/Fzv3tWGJv0wPA=="],
-
-    "grpc": ["grpc@workspace:packages/grpc"],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 
