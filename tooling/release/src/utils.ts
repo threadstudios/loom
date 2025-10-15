@@ -1,4 +1,9 @@
-import type { JSONRecord } from "./types";
+import type {
+  JSONRecord,
+  PackageFileDetails,
+  PackageFileMap,
+  PackageJSONLike,
+} from "./types";
 
 export function getDependencyChanges(
   dependencyRecord: JSONRecord,
@@ -13,4 +18,11 @@ export function getDependencyChanges(
   });
 
   return newDeps;
+}
+
+export function applyPackageChanges(packageData: PackageFileDetails) {
+  return packageData.changes.reduce((acc: PackageJSONLike, change) => {
+    acc[change.field] = change.to;
+    return acc;
+  }, packageData.nextContent);
 }

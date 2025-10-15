@@ -14,15 +14,14 @@ export type PackageChange = {
   to: string | boolean | number | JSONRecord;
 };
 
-export type PackageFileMap = Map<
-  string,
-  {
-    writePath: string;
-    oldContent: PackageJSONLike;
-    nextContent: PackageJSONLike;
-    changes: PackageChange[];
-  }
->;
+export type PackageFileDetails = {
+  writePath: string;
+  oldContent: PackageJSONLike;
+  nextContent: PackageJSONLike;
+  changes: PackageChange[];
+};
+
+export type PackageFileMap = Map<string, PackageFileDetails>;
 
 export type PackageDependencyChangeData = {
   oldName: string;

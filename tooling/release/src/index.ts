@@ -1,18 +1,16 @@
 #!/usr/bin/env bun
 
 import semver from "semver";
-import { file, Glob } from "bun";
-import fs from "node:fs";
+import { Glob, write } from "bun";
 
 import { program } from "commander";
 import { input } from "@inquirer/prompts";
 import type {
   PackageFileMap,
-  PackageChange,
   PackageDependencyChangeData,
   JSONRecord,
 } from "./types";
-import { getDependencyChanges } from "./utils";
+import { applyPackageChanges, getDependencyChanges } from "./utils";
 
 const packagesToPublish: Record<string, string> = {
   "@loom/common": "@threadws/loom-common",
@@ -59,11 +57,12 @@ program
 
     for (const [path, pkgJson] of Array.from(paths.entries())) {
       const newPath = `${process.cwd()}/${path}`;
-      fs.writeFileSync(
-        newPath,
-        JSON.stringify({ ...pkgJson, version: nextVersion }, null, 2),
-        "utf-8"
+      const data = JSON.stringify(
+        { ...pkgJson, version: nextVersion },
+        null,
+        2
       );
+      await write(newPath, data);
     }
   });
 
@@ -116,6 +115,7 @@ program
           }
         }
       );
+      packageData.nextContent = applyPackageChanges(packageData);
       packageFileData.set(key, packageData);
     }
 
@@ -131,6 +131,10 @@ program
         );
       }
       return;
+    }
+
+    for (const [key, packageData] of packageFileData.entries()) {
+      await write(key, JSON.stringify(packageData.nextContent, null, 2));
     }
   });
 
