@@ -1,0 +1,26 @@
+{
+  "name": "@loom/graphql",
+  "module": "./src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@loom/common": "workspace:*",
+    "graphql": "^16.11.0",
+    "graphql-http": "^1.22.4",
+    "reflect-metadata": "^0.2.2",
+    "ruru": "^2.0.0-beta.30",
+    "ts-pattern": "^5.8.0",
+    "typedi": "^0.10.0"
+  },
+  "version": "0.0.2"
+}

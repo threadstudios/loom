@@ -1,0 +1,21 @@
+{
+  "name": "@loom/core",
+  "module": "./src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2",
+    "typedi": "^0.10.0"
+  },
+  "version": "0.0.2"
+}

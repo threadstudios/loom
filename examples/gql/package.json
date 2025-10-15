@@ -1,0 +1,21 @@
+{
+  "name": "@loom/examples-gql",
+  "module": "./src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@loom/core": "workspace:*",
+    "@loom/graphql": "workspace:*",
+    "zod": "^4.1.11"
+  }
+}

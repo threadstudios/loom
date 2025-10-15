@@ -1,0 +1,19 @@
+{
+  "name": "@loom/release",
+  "module": "./src/index.ts",
+  "type": "module",
+  "bin": {
+    "loom-release": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.9.0",
+    "commander": "^14.0.1",
+    "semver": "^7.7.3"
+  }
+}
