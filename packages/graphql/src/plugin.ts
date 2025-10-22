@@ -24,7 +24,7 @@ export const LoomGqlPlugin = () => (instance: LoomInstance) => {
       const handler = createHandler({ schema, context: { req, custom: {} } });
       const result = await handler(req);
       logger.info("GraphQL request processed");
-      return result;
+      return { body: result };
     },
   });
 
@@ -32,15 +32,15 @@ export const LoomGqlPlugin = () => (instance: LoomInstance) => {
     methods: [HttpMethods.Get],
     path: "/graphiql",
     handler: () => {
-      return new Response(
-        ruruHTML({
+      const headers = new Headers();
+      headers.set("Content-Type", "text/html");
+      return {
+        body: ruruHTML({
           endpoint: "/graphql",
           htmlParts: { titleTag: `<title>${instance.applicationName}</title>` },
         }),
-        {
-          headers: { "Content-Type": "text/html" },
-        }
-      );
+        headers,
+      };
     },
   });
 };

@@ -6,5 +6,6 @@ import type { LoomMiddlewareClass } from "@threadws/loom-rest";
 export class TestMiddleware implements LoomMiddlewareClass {
   async run(request: LoomRequest<{ userId: string }>): Promise<void> {
     request.requestContext.set("userId", "12345");
+    console.log("TestMiddleware executed, userId set in context.");
   }
 }

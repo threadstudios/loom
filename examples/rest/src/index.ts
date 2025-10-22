@@ -8,4 +8,7 @@ const app = new Loom({
 
 app.use(LoomRestPlugin({ withScalar: true }));
 
-app.listen(3165);
+app.listen(3165, {
+  allowedOrigins: ["*"],
+  allowedMethods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"],
+});

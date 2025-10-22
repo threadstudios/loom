@@ -23,13 +23,13 @@ export class AppController {
 
   @Get("/test/:id", [TestMiddleware])
   test(@Param("id") id: string, @Ctx("userId") userId: string) {
-    return new Response(`Test ID: ${id}, User ID: ${userId}`);
+    return `Test ID: ${id}, User ID: ${userId}`;
   }
 
   @Post("/test")
   @Input(z.object({ name: z.string() }))
   @Output(z.object({ message: z.string() }))
   postTest(@Body("name") name: string) {
-    return Response.json({ message: "Hello " + name });
+    return { message: "Hello " + name };
   }
 }

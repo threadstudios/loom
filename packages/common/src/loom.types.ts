@@ -24,5 +24,9 @@ export type LoomPlugin = (instance: LoomInstance) => void;
 export interface Route {
   methods: HttpMethods[];
   path: string;
-  handler: (request: BunRequest) => Promise<Response> | Response;
+  handler: (
+    request: BunRequest
+  ) =>
+    | Promise<{ body: unknown; status?: number; headers?: Headers }>
+    | { body: unknown; status?: number; headers?: Headers };
 }

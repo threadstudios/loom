@@ -1,7 +1,11 @@
 import type { LoomPlugin, Route } from "@threadws/loom-common";
 import { Logger, LoomInstance } from "@threadws/loom-common";
 import bun from "bun";
+import "reflect-metadata";
 import Container from "typedi";
+import { loomRouteToBunRoute } from "./mapper/loomRouteToBunRoute";
+import type { CompiledRoutes } from "./types";
+import { loomMethodToBunServeMethod } from "./util";
 
 type plugin = () => { routes?: Route[] };
 
@@ -44,19 +48,51 @@ export class Loom implements LoomInstance {
     plugin(this);
   }
 
-  listen(port: number) {
+  listen(
+    port: number,
+    cors?: {
+      allowedOrigins: string[];
+      allowedMethods: string[];
+    }
+  ) {
+    const headers = new Headers();
+
+    if (cors) {
+      headers.set(
+        "Access-Control-Allow-Origin",
+        cors.allowedOrigins.join(", ")
+      );
+      headers.set(
+        "Access-Control-Allow-Methods",
+        cors.allowedMethods.join(", ")
+      );
+      headers.set("Access-Control-Allow-Headers", "*");
+    }
+
+    const compiledRoutes = this.routes.reduce((acc: CompiledRoutes, route) => {
+      if (!acc[route.path]) {
+        acc[route.path] = {};
+      }
+      route.methods.forEach((method) => {
+        this.logger.info(`Registering route [${method}] ${route.path}`);
+        acc[route.path]![loomMethodToBunServeMethod(method)] =
+          loomRouteToBunRoute(route, headers);
+      });
+      return acc;
+    }, {});
+
+    if (cors) {
+      for (const path in compiledRoutes) {
+        compiledRoutes[path]!["OPTIONS"] = async () => {
+          return new Response(null, { headers });
+        };
+      }
+    }
+
+    this.logger.info(`Starting server on port ${port}...`);
     bun.serve({
       port: port || 3645,
-      routes: this.routes.reduce(
-        (acc: Record<string, Route["handler"]>, route) => {
-          this.logger.info(
-            `Registering route: [${route.methods.join(",")}] ${route.path}`
-          );
-          acc[`${route.path}`] = route.handler;
-          return acc;
-        },
-        {}
-      ),
+      routes: compiledRoutes,
     });
   }
 }

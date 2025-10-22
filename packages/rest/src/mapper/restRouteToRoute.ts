@@ -3,7 +3,7 @@ import type { BunRequest } from "bun";
 import Container from "typedi";
 import { getControllerRoute } from "../decorators/controller.decorator";
 import { extractAllParams } from "../decorators/params.decorator";
-import { LoomMiddlewareClass, type LoomMiddleware } from "../middleware";
+import { type LoomMiddleware } from "../middleware";
 import { asyncLocalStorage, requestContext } from "../requestContext";
 import type { Loom__RouterCache } from "../route.cache";
 import type { ValidRestRoute } from "../schema/validRestRoute.schema";
@@ -37,6 +37,7 @@ export function restRouteToRoute({
     handler: async (request: BunRequest) => {
       logger.info(`Incoming request:`, {
         route: routePath,
+        request,
       });
       return await asyncLocalStorage.run({}, async () => {
         const { searchParams } = new URL(request.url);
@@ -61,8 +62,9 @@ export function restRouteToRoute({
           ...controllerMiddlewares,
           ...(restRoute.middleware ?? []),
         ]) {
-          const mdx = Container.get(middleware);
-          if (mdx instanceof LoomMiddlewareClass) {
+          const mdx: { run: Function } = Container.get(middleware);
+          if (mdx.run) {
+            console.log("Running middleware:", middleware);
             await mdx.run(loomRequest);
           }
         }
@@ -79,14 +81,11 @@ export function restRouteToRoute({
           loomRequest
         );
 
-        const result: Response = restRoute.handler.apply(
-          controllerInstance,
-          args
-        );
+        const result = restRoute.handler.apply(controllerInstance, args);
         logger.info(`Request handled successfully`, {
           route: routePath,
         });
-        return result;
+        return { body: result };
       });
     },
   };

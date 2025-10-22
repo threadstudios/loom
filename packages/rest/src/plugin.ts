@@ -37,17 +37,19 @@ export const LoomRestPlugin =
             version: "1.0.0",
             baseUrl: request.url.replace("docs/openapi.json", ""),
           });
-          return Response.json(generatedDocument);
+          return { body: generatedDocument };
         },
       });
       instance.addRoute({
         path: "/docs",
         methods: [HttpMethods.Get],
         handler: async (request: BunRequest) => {
-          return new Response(
-            renderHTML({ baseUrl: request.url.replace(/\/docs$/, "") }),
-            { headers: { "Content-Type": "text/html" } }
-          );
+          const headers = new Headers();
+          headers.set("Content-Type", "text/html");
+          return {
+            body: renderHTML({ baseUrl: request.url.replace(/\/docs$/, "") }),
+            headers,
+          };
         },
       });
     }

@@ -40,7 +40,7 @@
     },
     "packages/common": {
       "name": "@threadws/loom-common",
-      "version": "0.0.3",
+      "version": "0.0.5",
       "dependencies": {
         "@logtape/logtape": "^1.1.1",
         "@logtape/pretty": "^1.1.1",
@@ -57,9 +57,10 @@
     },
     "packages/core": {
       "name": "@threadws/loom-core",
-      "version": "0.0.3",
+      "version": "0.0.5",
       "dependencies": {
         "reflect-metadata": "^0.2.2",
+        "ts-pattern": "^5.8.0",
         "typedi": "^0.10.0",
       },
       "devDependencies": {
@@ -71,7 +72,7 @@
     },
     "packages/graphql": {
       "name": "@threadws/loom-graphql",
-      "version": "0.0.3",
+      "version": "0.0.5",
       "dependencies": {
         "@threadws/loom-common": "workspace:*",
         "graphql": "^16.11.0",
@@ -90,7 +91,7 @@
     },
     "packages/rest": {
       "name": "@threadws/loom-rest",
-      "version": "0.0.3",
+      "version": "0.0.5",
       "dependencies": {
         "@threadws/loom-common": "workspace:*",
         "openapi3-ts": "^4.5.0",
