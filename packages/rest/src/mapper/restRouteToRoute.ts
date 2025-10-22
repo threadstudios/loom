@@ -76,8 +76,7 @@ export function restRouteToRoute({
           restRoute.target,
           restRoute.handler.name,
           args,
-          loomRequest,
-          Response
+          loomRequest
         );
 
         const result: Response = restRoute.handler.apply(

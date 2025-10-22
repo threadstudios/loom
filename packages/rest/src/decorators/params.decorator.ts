@@ -36,6 +36,11 @@ const params = [
         : req.requestContext.getStore();
     },
   },
+  {
+    name: "req",
+    hasArgs: false,
+    fetcher: (req: LoomRequest) => req,
+  },
 ];
 
 function createParamDecorator(name: string, hasArgs: boolean) {
@@ -61,8 +66,7 @@ export function extractAllParams(
   target: object,
   propertyKey: string | symbol,
   args: unknown[],
-  request: LoomRequest,
-  response: typeof Response
+  request: LoomRequest
 ) {
   for (const { name, fetcher, hasArgs } of params) {
     const parameters: { index: number; name: string }[] =
@@ -77,9 +81,6 @@ export function extractAllParams(
         })
         .with("req", () => {
           args[param.index] = request;
-        })
-        .with("res", () => {
-          args[param.index] = response;
         });
     }
   }
@@ -90,5 +91,4 @@ export const Query = createParamDecorator("query", true);
 export const Param = createParamDecorator("params", true);
 export const Cookie = createParamDecorator("cookie", true);
 export const Req = createParamDecorator("req", false);
-export const Res = createParamDecorator("res", false);
 export const Ctx = createParamDecorator("ctx", true);
