@@ -51,26 +51,24 @@ export class Loom implements LoomInstance {
   listen(
     port: number,
     cors?: {
-      allowedOrigins: string[];
-      allowedMethods: string[];
-      allowedHeaders?: string[];
+      origins: string[];
+      methods: string[];
+      headers?: string[];
+      credentials?: boolean;
     }
   ) {
     const headers = new Headers();
 
     if (cors) {
-      headers.set(
-        "Access-Control-Allow-Origin",
-        cors.allowedOrigins.join(", ")
-      );
-      headers.set(
-        "Access-Control-Allow-Methods",
-        cors.allowedMethods.join(", ")
-      );
+      headers.set("Access-Control-Allow-Origin", cors.origins.join(", "));
+      headers.set("Access-Control-Allow-Methods", cors.methods.join(", "));
       headers.set(
         "Access-Control-Allow-Headers",
-        cors.allowedHeaders?.join(", ") || "*"
+        cors.headers?.join(", ") || "*"
       );
+      if (cors.credentials) {
+        headers.set("Access-Control-Allow-Credentials", "true");
+      }
     }
 
     const compiledRoutes = this.routes.reduce((acc: CompiledRoutes, route) => {
