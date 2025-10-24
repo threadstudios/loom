@@ -168,7 +168,12 @@ export class LoomGqlSchemaBuilder {
         for (const argMeta of operationArgs) {
           match(argMeta.paramType)
             .with(MetaParamType.Ctx, () => {
-              orderedArgs[argMeta.index] = context.custom;
+              const narrowed = Array.isArray(argMeta.arguments)
+                ? argMeta.arguments[0]
+                : argMeta.arguments;
+              orderedArgs[argMeta.index] = narrowed
+                ? context.custom[narrowed]
+                : context.custom;
             })
             .with(MetaParamType.Info, () => {
               orderedArgs[argMeta.index] = _info;
@@ -182,7 +187,13 @@ export class LoomGqlSchemaBuilder {
             .exhaustive();
         }
       }
-      return await resolverFn.call(parentClass, ...orderedArgs);
+
+      console.log(parentClass);
+
+      return await resolverFn.call(
+        Container.get(parentClass.constructor),
+        ...orderedArgs
+      );
     };
   }
 

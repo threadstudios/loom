@@ -5,11 +5,11 @@ import { Loom__GraphQLMetadata } from "../gql.meta";
 export const RESOLVER_METADATA_KEY = Symbol("LOOM_GQL_RESOLVER_METADATA");
 
 export function Resolver(typeFn: () => any) {
-  return (target: Function) => {
-    Service()(target.constructor);
-    Reflect.defineMetadata(RESOLVER_METADATA_KEY, { type: typeFn }, target);
+  return <TFunction extends Function>(ctor: TFunction) => {
+    Service()(ctor);
+    Reflect.defineMetadata(RESOLVER_METADATA_KEY, { type: typeFn }, ctor);
     const meta = Container.get(Loom__GraphQLMetadata);
-    meta.registerResolver(target.name, {
+    meta.registerResolver(ctor.name, {
       objectType: typeFn,
     });
   };

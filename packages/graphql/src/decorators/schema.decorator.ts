@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { Service } from "typedi";
 
 export function Schema() {
-  return (target: Function) => {
-    Service()(target.constructor);
+  return <TFunction extends Function>(ctor: TFunction) => {
+    Service()(ctor);
   };
 }
