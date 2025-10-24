@@ -14,6 +14,7 @@ import {
 } from "graphql";
 import "reflect-metadata";
 import { match } from "ts-pattern";
+import { Container } from "typedi";
 import type { Loom__GraphQLMetadata } from "./gql.meta";
 import {
   MetaObjectType,
@@ -154,8 +155,9 @@ export class LoomGqlSchemaBuilder {
       _info: GraphQLResolveInfo
     ) => {
       const isAuth = await Promise.all(
-        guards?.map((g) => new g().canActivate(context.req, context.custom)) ||
-          []
+        guards?.map((g) =>
+          Container.get(g).canActivate(context.req, context.custom)
+        ) || []
       );
       if (isAuth.includes(false)) {
         throw new Error("Unauthorized");

@@ -53,6 +53,7 @@ export class Loom implements LoomInstance {
     cors?: {
       allowedOrigins: string[];
       allowedMethods: string[];
+      allowedHeaders?: string[];
     }
   ) {
     const headers = new Headers();
@@ -66,7 +67,10 @@ export class Loom implements LoomInstance {
         "Access-Control-Allow-Methods",
         cors.allowedMethods.join(", ")
       );
-      headers.set("Access-Control-Allow-Headers", "*");
+      headers.set(
+        "Access-Control-Allow-Headers",
+        cors.allowedHeaders?.join(", ") || "*"
+      );
     }
 
     const compiledRoutes = this.routes.reduce((acc: CompiledRoutes, route) => {

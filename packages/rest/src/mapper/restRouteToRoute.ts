@@ -64,7 +64,6 @@ export function restRouteToRoute({
         ]) {
           const mdx: { run: Function } = Container.get(middleware);
           if (mdx.run) {
-            console.log("Running middleware:", middleware);
             await mdx.run(loomRequest);
           }
         }

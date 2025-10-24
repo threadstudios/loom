@@ -7,8 +7,8 @@ import {
   Schema,
 } from "@threadws/loom-graphql";
 import { AuthGuard } from "./auth.guard";
-import { Todo } from "./todo.object";
 import { PaginationInput } from "./pagination.object";
+import { Todo } from "./todo.object";
 
 @Guard([AuthGuard])
 @Schema()
@@ -20,6 +20,7 @@ export class TodoSchema {
     @Ctx() ctx?: any,
     @Parent() parent?: any
   ) {
+    console.log("Context:", ctx);
     return [
       { id: "1", title: "First Todo", completed: false },
       { id: "2", title: "Second Todo", completed: true },

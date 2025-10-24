@@ -1,11 +1,12 @@
-import { Query, ResolveField, Resolver } from "@threadws/loom-graphql";
+import { Ctx, Query, ResolveField, Resolver } from "@threadws/loom-graphql";
 import { Todo } from "./todo.object";
 import { User } from "./user.object";
 
 @Resolver(() => User)
 export class UserResolver {
   @Query(() => User)
-  getUser() {
+  getUser(@Ctx() ctx: { userId: string }) {
+    console.log(ctx);
     return { id: "1", email: "paul@westerdale.me" };
   }
 
