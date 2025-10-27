@@ -17,7 +17,8 @@ export type LoomOptions = {
 
 export class Loom implements LoomInstance {
   private routes: Route[] = [];
-  private logger: ReturnType<Logger["getChild"]>;
+  private coreLogger: ReturnType<Logger["getChild"]>;
+  private masterLogger: Logger;
 
   public applicationName = "Loom App";
 
@@ -30,7 +31,8 @@ export class Loom implements LoomInstance {
   }) {
     const masterLogger = new Logger();
     Container.set(Logger, masterLogger);
-    this.logger = masterLogger.getChild("core");
+    this.masterLogger = masterLogger;
+    this.coreLogger = masterLogger.getChild("core");
     if (applicationName) {
       this.applicationName = applicationName;
     }
@@ -46,6 +48,10 @@ export class Loom implements LoomInstance {
 
   use(plugin: LoomPlugin): void {
     plugin(this);
+  }
+
+  logger(): Logger {
+    return this.masterLogger;
   }
 
   listen(
@@ -76,7 +82,7 @@ export class Loom implements LoomInstance {
         acc[route.path] = {};
       }
       route.methods.forEach((method) => {
-        this.logger.info(`Registering route [${method}] ${route.path}`);
+        this.coreLogger.info(`Registering route [${method}] ${route.path}`);
         acc[route.path]![loomMethodToBunServeMethod(method)] =
           loomRouteToBunRoute(route, headers);
       });
@@ -91,7 +97,7 @@ export class Loom implements LoomInstance {
       }
     }
 
-    this.logger.info(`Starting server on port ${port}...`);
+    this.coreLogger.info(`Starting server on port ${port}...`);
     bun.serve({
       port: port || 3645,
       routes: compiledRoutes,
